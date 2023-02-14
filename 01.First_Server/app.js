@@ -1,4 +1,10 @@
-const app = require("express")();
+//const app = require("express")();
+const express = require("express");
+const app = express();
+
+app.use(express.json());
+
+
 
 app.listen(8080); // 8080 is http dev port
 
@@ -20,5 +26,21 @@ app.get("/dino", (req, res) => {
 
 app.get("/about",(req, res) => {
     res.send(`
-    <h1>About</h1>`)
+    <h1>About</h1>`);
 });
+
+// /bat?adjective=spooky
+app.get("/bat", (req, res) => {
+    console.log(req.query);
+    res.send({message: `The bat is ` + req.query.adjective});
+});
+
+// /bottle/large
+app.get("/bottle/:bootleSize", (req,res) => {
+    console.log(req.params)
+    res.send({bottleSize: req.params.bottleSize});
+});
+
+app.post("/package", (req, res) => {
+    res.send({message: req.body})
+})

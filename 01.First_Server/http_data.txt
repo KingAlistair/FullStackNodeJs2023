@@ -1,0 +1,5 @@
+anatomy on an url
+
+protocol / domain / endpoint / path variable ? query string
+http://127.0.0.1/kickdinosaur/:id?size=1200
+http://localhost/
