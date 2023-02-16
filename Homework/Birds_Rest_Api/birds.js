@@ -3,7 +3,7 @@ const app = express();
 
 app.use(express.json());
 
-app.listen(8080); 
+app.listen(8080);
 
 
 //Get Requests
@@ -15,10 +15,24 @@ app.get("/birds", (req, res) => {
 
 //birds/id  -> http://localhost:8080/birds/1
 app.get("/birds/:id", (req, res) => {
-    res.send({ Chosen_bird: birds[req.params.id-1] });
+    const id = parseInt(req.params.id);
+    const bird = getBirdById(id);
+    if (bird) {
+        res.send({ Chosen_bird: bird });
+    } else {
+        res.send("No bird was found with id: " + id);
+    };
 });
 
-
+function getBirdById(id) {
+    let chosenBird = null;
+    birds.forEach(element => {
+        if (element.id === id) {
+            chosenBird = element;
+        };
+    });
+    return chosenBird;
+};
 
 //Birds data
 
