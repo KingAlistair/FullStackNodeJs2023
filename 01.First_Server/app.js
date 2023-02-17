@@ -1,7 +1,9 @@
-//const app = require("express")();
+//import
 const express = require("express");
+//instenciate
 const app = express();
 
+//Let us passing the body of th Json
 app.use(express.json());
 
 
@@ -9,6 +11,7 @@ app.use(express.json());
 app.listen(8080); // 8080 is http dev port
 
 app.get("/", (req, res) => {
+    //Json format: { message: "Our first route"}
     res.send({ message: "Our first route" });
 });
 
