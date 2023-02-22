@@ -10,6 +10,7 @@ app.get("/birds", (req, res) => {
     res.send(birds);
 });
 
+
 //getById
 app.get("/birds/:id", (req, res) => {
     const foundBird = birds.find(bird => bird.id === Number(req.params.id));
@@ -44,6 +45,7 @@ app.put("/birds/:id", (req, res) => {
     }
   });
 
+  
 //delete
 app.delete("/birds/:id", (req, res) => {
     const index = birds.findIndex(bird => bird.id === Number(req.params.id));
