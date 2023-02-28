@@ -34,14 +34,13 @@ app.post("/birds", (req, res) => {
 
 //update
 app.put("/birds/:id", (req, res) => {
-    const bird = birds.find(bird => bird.id === Number(req.params.id));
-    if (bird) {
-      const { name, description } = req.body;
-      bird.name = name || bird.name;
-      bird.description = description || bird.description;
-      res.send(bird);
+    const foundIndex = birds.findIndex(bird => bird.id === Number(req.params.id));
+    if (foundIndex !== -1) {
+      const foundBird = birds[foundIndex];
+      birds[foundIndex] = {...foundBird, ...req.body, id: foundBird.id};
+      res.send({data: birds[foundIndex]});
     } else {
-      res.send({ message: "Bird not found" });
+      res.status(404).send({ message: "Bird not found with id " + req.params.id });
     }
   });
 

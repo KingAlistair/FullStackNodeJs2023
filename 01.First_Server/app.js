@@ -27,7 +27,7 @@ app.get("/dino", (req, res) => {
 })
 
 
-app.get("/about",(req, res) => {
+app.get("/about", (req, res) => {
     res.send(`
     <h1>About</h1>`);
 });
@@ -35,15 +35,41 @@ app.get("/about",(req, res) => {
 // /bat?adjective=spooky
 app.get("/bat", (req, res) => {
     console.log(req.query);
-    res.send({message: `The bat is ` + req.query.adjective});
+    res.send({ message: `The bat is ` + req.query.adjective });
 });
 
 // /bottle/large
-app.get("/bottle/:bootleSize", (req,res) => {
+app.get("/bottle/:bootleSize", (req, res) => {
     console.log(req.params)
-    res.send({bottleSize: req.params.bottleSize});
+    res.send({ bottleSize: req.params.bottleSize });
 });
 
 app.post("/package", (req, res) => {
-    res.send({message: req.body})
+    res.send({ message: req.body })
+});
+
+app.get("/time", (req, res) => {
+    res.send({
+        timeUTC: new Date(),
+        timeLocal: Date(),
+        unixTimeStampe: Date.now()
+    });
+});
+
+app.get("/time/day", (req, res) => {
+    res.send({ day: getDayName(new Date(), "en-EN")})
 })
+
+var month= ["January","February","March","April","May","June","July",
+            "August","September","October","November","December"];
+
+app.get("/time/month", (req, res) => {
+    res.send({ month: month[new Date().getMonth()]})
+})
+
+
+function getDayName(dateStr, locale)
+{
+    var date = new Date(dateStr);
+    return date.toLocaleDateString(locale, { weekday: 'long' });        
+}
