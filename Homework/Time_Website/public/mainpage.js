@@ -1,4 +1,4 @@
-fetch("/api/time")
+fetch("/api/timezones")
   .then((response) => response.json())
   .then((result) => {
     console.log(result)

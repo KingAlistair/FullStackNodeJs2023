@@ -1,34 +1,26 @@
 const express = require("express");
 const app = express();
 
+
 app.use(express.static("public"));
 app.listen(8080);
+
 
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/public/mainpage.html")
 });
 
-app.get("/api/time", (req, res) => {
-    res.send({ data: cities });
-})
 
-//All timezones
-const timeZones = Intl.supportedValuesOf('timeZone');
-
-//Creating date and empty cities array
-const date = new Date;
-const cities = [];
-
-//Creates city objects with name and date and adding them to cities array.
-createCitiesFromTimeZones(timeZones);
-
-function createCitiesFromTimeZones(timeZones) {
-
+app.get("/api/timezones", (req, res) => {
+    const date = new Date;
+    const timeZones = Intl.supportedValuesOf('timeZone');
+    const cities = [];
     timeZones.forEach((timeZone) => {
-    
+
         cities.push({
             name: timeZone,
-            date: date.toLocaleString("en-US", {timeZone: timeZone})
+            date: date.toLocaleString("en-US", { timeZone: timeZone })
         });
-    return cities;
-})};
+    });
+    res.send({ data: cities });
+});

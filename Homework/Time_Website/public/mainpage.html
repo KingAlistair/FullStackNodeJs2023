@@ -10,10 +10,13 @@
 
 <body>
     <h1>All the time in the world:</h1>
+
+    <button onclick=location.reload()>Refresh</button>
+
     <div id="cities-wrapper"></div>
 
     <script>
-        fetch("/api/time")
+        fetch("/api/timezones")
             .then((response) => response.json())
             .then((result) => {
                 console.log(result)
@@ -28,9 +31,7 @@
                     cityDiv.appendChild(cityName);
                     cityDiv.appendChild(cityDate);
                     cityWrapperDiv.appendChild(cityDiv);
-
                 });
-
             });
     </script>
 </body>
