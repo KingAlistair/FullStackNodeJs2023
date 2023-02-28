@@ -3,7 +3,7 @@ const app = express();
 
 module.exports = app;
 
-app.use(express.static("public"));
+app.use(express.static('public'));
 app.listen(8080);
 
 app.get("/", (req, res) => {
