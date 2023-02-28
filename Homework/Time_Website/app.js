@@ -7,7 +7,7 @@ app.use(express.static("public"));
 app.listen(8080);
 
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/public/mainpage/mainpage.html")
+    res.sendFile(__dirname + "/public/mainpage.html")
 });
 
 app.get("/api/time", (req, res) => {
