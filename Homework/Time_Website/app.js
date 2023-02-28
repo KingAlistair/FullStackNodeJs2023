@@ -1,8 +1,6 @@
 const express = require("express");
 const app = express();
 
-module.exports = app;
-
 app.use(express.static("public"));
 app.listen(8080);
 
@@ -15,13 +13,13 @@ app.get("/api/time", (req, res) => {
 })
 
 //All timezones
-const timeZones = Intl.supportedValuesOf('timeZone')
+const timeZones = Intl.supportedValuesOf('timeZone');
 
-//Creating date and empty cities array;
-let date = new Date;
-const cities = []
+//Creating date and empty cities array
+const date = new Date;
+const cities = [];
 
-//Creates city objects with name and date
+//Creates city objects with name and date and adding them to cities array.
 createCitiesFromTimeZones(timeZones);
 
 function createCitiesFromTimeZones(timeZones) {

@@ -1,6 +1,3 @@
-console.log("hello");
-
-
 fetch("/api/time")
   .then((response) => response.json())
   .then((result) => {
