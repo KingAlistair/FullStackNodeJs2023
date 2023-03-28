@@ -1,7 +1,8 @@
 //import
-const express = require("express");
-//instenciate
-const app = express();
+const { response } = require("express");
+const express = require("express"); //import express
+//instanciate
+const app = express(); //initialize express
 
 //Let us passing the body of th Json
 app.use(express.json());
@@ -13,6 +14,13 @@ app.listen(8080); // 8080 is http dev port
 app.get("/", (req, res) => {
     //Json format: { message: "Our first route"}
     res.send({ message: "Our first route" });
+});
+
+
+app.get("/proxy", (req,res) => {
+fetch('https://www.google.com')
+.then(response => response.text())
+.then(result => res.send(result));
 });
 
 let bicycleSpin = 0;

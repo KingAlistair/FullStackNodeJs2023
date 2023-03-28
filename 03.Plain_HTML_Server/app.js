@@ -4,6 +4,13 @@ const app = express();
 
 app.use(express.static("public"));
 
+
+const tanksUtil = require("./util/tanks.js");
+
+const { getTanks, addTank } = require("./util/tanks.js");
+
+console.log(getTanks());
+
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/public/frontpage/frontpage.html")
 });
@@ -12,20 +19,31 @@ app.get("/tanks", (req, res) => {
     res.sendFile(__dirname + "/public/tanks/tanks.html")
 });
 
-app.get("/api/tanks", (req, res) =>{
-    res.send({data: tanks});
-});
-
-app.get("/visitors", (req,res) => {
+app.get("/visitors", (req, res) => {
     res.sendFile(__dirname + "/public/visitors/visitors.html")
 });
 
-app.get("/api/visitors", (req,res) => {
-    res.send({data: visitorCount})
+app.get("/museumguards", (req, res) => {
+    res.sendFile(__dirname + "/public/museumguards/museumguards.html");
 });
 
-app.put("/api/visitors", (req,res) => {
-    res.send({data: ++visitorCount});
+app.get("/api/guards", (req, res) => {
+    if (req.query.passport === "theskyisblue") {
+        return res.redirect("/api/tanks"); //returns - exit the functions instead of going on.
+    };
+        res.send({ message: "You are not allowed in!" });
+});
+
+app.get("/api/tanks", (req, res) => {
+    res.send({ data: tanks });
+});
+
+app.get("/api/visitors", (req, res) => {
+    res.send({ data: visitorCount })
+});
+
+app.put("/api/visitors", (req, res) => {
+    res.send({ data: ++visitorCount });
 });
 
 const tanks = [{
