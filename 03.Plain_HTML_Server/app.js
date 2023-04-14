@@ -1,15 +1,18 @@
-const express = require("express");
-
+import express from "express";
 const app = express();
 
 app.use(express.static("public"));
 
 
-const tanksUtil = require("./util/tanks.js");
+import tankRouter from "./routers/tankRouter.js"
+app.use(tankRouter);
+import visitorRouter from "./routers/visitorRouter.js"
+app.use(visitorRouter);
+import guardRouter from "./routers/guardRouter.js"
+app.use(guardRouter);
 
-const { getTanks, addTank } = require("./util/tanks.js");
 
-console.log(getTanks());
+
 
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/public/frontpage/frontpage.html")
